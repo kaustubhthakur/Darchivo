@@ -157,7 +157,7 @@ const App = () => {
   }, []);
   return (
   
-    <>
+    <div  className='bg-hexagon '>
   
     {!modalOpen && (
       <button className="share" onClick={() => setModalOpen(true)}>
@@ -185,7 +185,7 @@ const App = () => {
       ></FileUpload>
       <Display contract={contract} account={account}></Display>
     </div>
-  </>
+  </div>
   )
 }
 
