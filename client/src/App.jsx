@@ -4,6 +4,7 @@ import "./App.css"
 import Display from './components/display/Display';
 import Modal from './components/modal/Modal';
 import FileUpload from './components/upload/FileUpload';
+import MetaMaskConnect from './components/metamask/MetamaskConnect';
 const UploadABI=[
 	{
 		"inputs": [
@@ -100,6 +101,27 @@ const App = () => {
     const [contract,setContract] = useState("")
     const [provider,setProvider] = useState(null);
     const [modalOpen,setModalOpen] = useState(false);
+    useEffect(() => {
+      if (window.ethereum) {
+        const ethProvider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(ethProvider);
+      } else {
+        console.error("Please install MetaMask!");
+      }
+    }, []);
+  
+    const connectWallet = async () => {
+      try {
+        const accounts = await provider.send("eth_requestAccounts", []);
+        setAccount(accounts[0]);
+      } catch (err) {
+        console.error("Failed to connect wallet", err);
+      }
+    };
+  
+    const disconnectWallet = () => {
+      setAccount(null);
+    };
    // const [provider,setProvider] = useState(null);
    useEffect(() => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -136,6 +158,7 @@ const App = () => {
   return (
   
     <>
+  
     {!modalOpen && (
       <button className="share" onClick={() => setModalOpen(true)}>
         Share
@@ -146,14 +169,15 @@ const App = () => {
     )}
 
     <div className="App">
-      <h1 style={{ color: "white" }}>DDrive</h1>
+      <h1 style={{ color: "white" }}>Darchivo</h1>
       <div class="bg"></div>
       <div class="bg bg2"></div>
       <div class="bg bg3"></div>
 
-      <p style={{ color: "white" }}>
+       <p className='address-metamask'>
         Account : {account ? account : "Not connected"}
-      </p>
+      </p> 
+      
       <FileUpload
         account={account}
         provider={provider}

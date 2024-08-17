@@ -1,0 +1,41 @@
+.metamask-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .account-info {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #4caf50;
+  }
+  
+  .metamask-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .metamask-button.connect {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .metamask-button.connect:hover {
+    background-color: #45a049;
+  }
+  
+  .metamask-button.disconnect {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .metamask-button.disconnect:hover {
+    background-color: #d32f2f;
+  }
+  
